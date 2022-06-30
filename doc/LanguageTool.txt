@@ -21,10 +21,12 @@ For Vim version 7.0 and above
 
 1. Overview                                           *languagetool-overview*
 
-This plugin integrates LanguageTool into Vim. LanguageTool is an Open Source
-style and grammar checker for English, French, German, etc. See
-http://www.languagetool.org/languages/ for a complete list of supported
-languages.
+This plugin integrates LanguageTool into Vim.
+LanguageTool is an Open Source style and
+grammar checker for English,
+ German,
+See http://www.languagetool.org/languages/ for a complete list of supported languages.
+
 
 LanguageTool detects grammar mistakes that a spelling checker cannot detect
 such as "it work" instead of "it works". Since version 1.8, LanguageTool
@@ -69,26 +71,31 @@ Preferably install the vim-LanguageTool plugin using a plugin
 manager such as vim-plug or Vundle.
 
 With vim-plug, you can install the plugin by adding this line to your
-~/.vimrc file: >
+~/.vimrc file:
+
 
   Plug 'dpelle/vim-LanguageTool'
 
-Then run: >
+Then run:
+
 
   :PlugInstall
 
 Alternatively, if you don't use a Vim plugin manager, copy the following
-3 files from https://github.com/dpelle/vim-LanguageTool into: >
+3 files from https://github.com/dpelle/vim-LanguageTool into:
+
 
   ~/.vim/autoload/languagetool.vim
   ~/.vim/plugin/LanguageTool.vim
   ~/.vim/doc/LanguageTool.txt
 
-Then index the documentation: >
+Then index the documentation:
+
 
   $ vim -c 'helptags ~/.vim/doc'
 
-You have to enable plugins by adding these two lines in your |.vimrc| file: >
+You have to enable plugins by adding these two lines in your |.vimrc| file:
+
 
   :set nocompatible
   :filetype plugin on
@@ -101,7 +108,8 @@ Recent versions of LanguageTool require Java-8.
 4.2.1 Download the stand-alone version of LanguageTool~
 
 Download the latest stable stand-alone version of LanguageTool
-(file LanguageTool-*.zip) from http://www.languagetool.org/download/ >
+(file LanguageTool-*.zip) from http://www.languagetool.org/download/
+
 
   $ wget https://languagetool.org/download/LanguageTool-5.2.zip
   $ unzip LanguageTool-5.2.zip
@@ -113,7 +121,8 @@ A more recent version may be available by the time you read this.
 
 Alternatively, you can choose to download the latest daily snapshot
 (file LanguageTool-*-snapshot.zip). This is a more recent version of
-LanguageTool than the stable version, but it is less tested: >
+LanguageTool than the stable version, but it is less tested:
+
 
   $ wget https://languagetool.org/download/snapshots/LanguageTool-20210123-snapshot.zip
   $ unzip LanguageTool-20210123-snapshot.zip
@@ -122,24 +131,28 @@ LanguageTool than the stable version, but it is less tested: >
 
 If you prefer to build LanguageTool yourself from sources, you first need
 to install the prerequisite packages. On Ubuntu, you need to install the
-following packages: >
+following packages:
+
 
   $ sudo apt-get install openjdk-8-jdk maven git
 
-LanguageTool can then be downloaded and built with Maven as follows: >
+LanguageTool can then be downloaded and built with Maven as follows:
+
 
   $ git clone https://github.com/languagetool-org/languagetool.git
   $ cd languagetool
   $ mvn clean package
 
-After the build, the command line version of LanguageTool can be found in: >
+After the build, the command line version of LanguageTool can be found in:
+
 
   languaetool/languagetool-standalone/target/LanguageTool-5.3-SNAPSHOT/LanguageTool-5.3-SNAPSHOT/languagetool-commandline.jar
 
 4.3 Configuring the location of the jar file~
 
 After installing LanguageTool, you must specify the location of the file
-languagetool-commandline.jar in your $HOME/.vimrc file. Example: >
+languagetool-commandline.jar in your $HOME/.vimrc file. Example:
+
 
   :let g:languagetool_jar='$HOME/languagetool/languagetool-standalone/target/LanguageTool-5.3-SNAPSHOT/LanguageTool-5.3-SNAPSHOT/languagetool-commandline.jar'
 
@@ -160,7 +173,8 @@ g:languagetool_jar                                       *g:languagetool_jar*
   This variable specifies the location of the LanguageTool java grammar
   checker program. Default is empty.
 
-  Example: >
+  Example:
+
 
   :let g:languagetool_jar='$HOME/languagetool/languagetool-standalone/target/LanguageTool-5.0-SNAPSHOT/LanguageTool-5.0-SNAPSHOT/languagetool-commandline.jar'
 
@@ -171,7 +185,8 @@ g:languagetool_cmd                                       *g:languagetool_cmd*
   This is useful for system package management installs like for
   archlinux.
 
-  Example: >
+  Example:
+
 
   :let g:languagetool_cmd='/usr/bin/languagetool'
   :let g:languagetool_cmd='java -jar $HOME/languagetool/languagetool-standalone/target/LanguageTool-4.3-SNAPSHOT/LanguageTool-4.3-SNAPSHOT/languagetool-commandline.jar'
@@ -187,7 +202,8 @@ g:languagetool_lang                                      *g:languagetool_lang*
   to signal spelling errors. In other words, with  :set spelllang=en
   LanguageTool only signals grammar mistakes whereas with
   :set spelllang=en_us LanguageTool signals spelling mistakes and
-  grammar mistakes. The valid language codes are: >
+  grammar mistakes. The valid language codes are:
+
 
     ar     Arabic
     ast    Asturian
@@ -244,7 +260,8 @@ g:languagetool_disable_rules                   *g:languagetool_disable_rules*
   must be comma separated.
   Default value set by plugin is: WHITESPACE_RULE,EN_QUOTES
 
-  Example: >
+  Example:
+
 
   :let g:languagetool_disable_rules='ENGLISH_WORD_REPEAT_BEGINNING_RULE,WHITESPACE_RULE,EN_QUOTES,FRENCH_WHITESPACE,UPPERCASE_SENTENCE_START,APOS'
 
@@ -255,7 +272,8 @@ g:languagetool_enable_rules                     *g:languagetool_enable_rules*
   or give frequent positive.
 
   Those rules can be enabled by setting the g:languagetool_enable_rules
-  variable. Example: >
+  variable. Example:
+
 
   :let g:languagetool_enable_rules=PASSIVE_VOICE
 
@@ -275,7 +293,8 @@ g:languagetool_win_height                         *g:languagetool_win_height*
   to let Vim pick a default size.
   Default is: 14
 
-You can also customize the following syntax highlighting groups: >
+You can also customize the following syntax highlighting groups:
+
 
   LanguageToolCmd
   LanguageToolErrorCount
@@ -286,7 +305,8 @@ You can also customize the following syntax highlighting groups: >
 
 For example, to highlight grammar errors in blue, and spelling errors in
 red, with a curly underline in vim GUIs that support it, add this into your
-colorscheme: >
+colorscheme:
+
 
   :hi LanguageToolGrammarError  guisp=blue gui=undercurl guifg=NONE guibg=NONE ctermfg=white ctermbg=blue term=underline cterm=none
   :hi LanguageToolSpellingError guisp=red  gui=undercurl guifg=NONE guibg=NONE ctermfg=white ctermbg=red  term=underline cterm=none
@@ -316,7 +336,8 @@ Use the |:LanguageToolClear| command to clear highlighting of grammar
 mistakes, close the scratch window containing the list of errors, clear
 and close the location-list.
 
-The two commands are also available from the menu in gvim: >
+The two commands are also available from the menu in gvim:
+
 
   Plugin -> LanguageTool -> Check
                          -> Clear
@@ -351,8 +372,9 @@ by clicking on the "Vim wiki" link at the top of the script page:
 
 8. Other plugin for grammar checking
 
-Grammalecte is another grammar checker for French.  A plugin for Vim is
-available at:
+
+A plugin for Vim is available at:
+
 
   https://github.com/dpelle/vim-Grammalecte
 
@@ -369,4 +391,5 @@ except use "LanguageTool.vim" instead of "Vim").
 LanguageTool is freely available under LGPL.
 
 ============================================================================
-vim:tw=78:fo=tcq2:isk=!-~,^*,^\|,^\":ts=8:ft=help:norl:
+DIY_again
+DIY_2  vim:filetype=help:syntax=help:
